@@ -219,6 +219,29 @@ section {
 
 .project-card p {
     color: var(--gray);
+    line-height: 1.6;
+}
+
+.project-details {
+    list-style: none;
+    padding: 0;
+    margin-top: 1rem;
+}
+
+.project-details li {
+    color: var(--gray);
+    padding: 0.4rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    font-size: 0.95rem;
+}
+
+.project-details li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--avocado);
+    font-weight: bold;
 }
 
 /* Cost of Living Section */
