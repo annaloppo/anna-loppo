@@ -26,8 +26,8 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe all fade-in-up elements
-document.querySelectorAll('.fade-in-up').forEach(el => {
+// Observe all animated elements
+document.querySelectorAll('.fade-in-up, .stagger-in').forEach(el => {
     observer.observe(el);
 });
 

@@ -51,6 +51,12 @@ nav .container {
     font-size: 1.5rem;
     font-weight: bold;
     color: var(--avocado);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.nav-brand:hover {
+    color: var(--avocado-light);
 }
 
 .nav-links a {
@@ -389,6 +395,48 @@ footer a:hover {
 .fade-in-up.visible {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* Staggered skill card animation */
+.stagger-in {
+    opacity: 0;
+    transform: translateY(40px) scale(0.95);
+    transition: opacity 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition-delay: calc(var(--i, 0) * 0.1s);
+}
+
+.stagger-in.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Skill card hover glow */
+.skill-card {
+    position: relative;
+}
+
+.skill-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    opacity: 0;
+    background: linear-gradient(135deg, var(--teal-glow), transparent);
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+}
+
+.skill-card:hover::before {
+    opacity: 1;
+}
+
+.skill-icon {
+    transition: transform 0.3s ease;
+}
+
+.skill-card:hover .skill-icon {
+    transform: scale(1.15);
 }
 
 @keyframes fadeIn {
