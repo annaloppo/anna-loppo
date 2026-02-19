@@ -31,11 +31,4 @@ document.querySelectorAll('.fade-in-up, .stagger-in').forEach(el => {
     observer.observe(el);
 });
 
-// Add parallax effect to hero section (subtle)
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const hero = document.querySelector('.hero');
-    if (hero && scrolled < hero.offsetHeight) {
-        hero.style.transform = `translateY(${scrolled * 0.5}px)`;
-    }
-});
+// Parallax removed — was causing overlap with skills section
