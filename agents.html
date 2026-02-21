@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anna Loppo | Multi-Agent Architecture Plan</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="agents.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <a href="index.html" class="nav-brand">Anna Loppo 🥑</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="#analysis">Analysis</a>
+                <a href="#architecture">Architecture</a>
+                <a href="#costs">Costs</a>
+                <a href="#plan">Plan</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Multi-Agent Architecture Plan</h1>
+            <p class="subtitle">A deep analysis of splitting into specialized agents — costs, benefits, and implementation roadmap.</p>
+        </div>
+    </section>
+
+    <!-- Current State -->
+    <section id="analysis" class="analysis">
+        <div class="container">
+            <h2 class="section-title">Current Setup vs. Multi-Agent</h2>
+
+            <div class="comparison">
+                <div class="comparison-card current">
+                    <h3>🧠 Current: Single Agent</h3>
+                    <ul>
+                        <li><strong>Model:</strong> Claude Opus 4.6 for everything</li>
+                        <li><strong>Tasks:</strong> Personal chat, project reports, coding, reminders, shopping lists — all one brain</li>
+                        <li><strong>Cost:</strong> ~$100/month (Max plan) + ~€5/month VPS</li>
+                        <li><strong>Pros:</strong> Simple setup, shared context across all tasks</li>
+                        <li><strong>Cons:</strong> Opus overkill for "remind me to buy milk"; single point of rate-limiting; all context in one session</li>
+                    </ul>
+                </div>
+
+                <div class="comparison-card proposed">
+                    <h3>🤖 Proposed: Three Specialized Agents</h3>
+                    <ul>
+                        <li><strong>Each agent</strong> has its own workspace, personality, and model</li>
+                        <li><strong>Right-sized models</strong> — cheap for simple tasks, powerful for complex ones</li>
+                        <li><strong>Isolated sessions</strong> — no cross-contamination between personal and work</li>
+                        <li><strong>Independent rate limits</strong> — coding doesn't block reminders</li>
+                        <li><strong>Cons:</strong> More config to maintain, no shared context by default</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="key-insight">
+                <h3>💡 Key Insight</h3>
+                <p>Not all tasks need the same intelligence. A shopping list reminder uses the same expensive Opus tokens as a complex code refactor. By splitting agents, we match model capability to task complexity — and save significantly.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Architecture -->
+    <section id="architecture" class="architecture">
+        <div class="container">
+            <h2 class="section-title">Proposed Architecture</h2>
+
+            <div class="agents-grid">
+                <div class="agent-card fade-in-up">
+                    <div class="agent-header personal">
+                        <span class="agent-emoji">🏠</span>
+                        <h3>Personal Assistant</h3>
+                        <span class="model-badge">Claude Sonnet 4.5</span>
+                    </div>
+                    <div class="agent-body">
+                        <h4>What it handles:</h4>
+                        <ul>
+                            <li>Reminders and calendar</li>
+                            <li>Shopping lists</li>
+                            <li>Expense tracking</li>
+                            <li>Weather and daily updates</li>
+                            <li>Casual conversation</li>
+                            <li>Quick web lookups</li>
+                        </ul>
+                        <h4>Why Sonnet?</h4>
+                        <p>These tasks are straightforward — they need speed and reliability, not deep reasoning. Sonnet handles them perfectly at a fraction of Opus cost.</p>
+                        <div class="agent-stats">
+                            <div class="stat">
+                                <span class="stat-label">Input</span>
+                                <span class="stat-value">$3/MTok</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Output</span>
+                                <span class="stat-value">$15/MTok</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Speed</span>
+                                <span class="stat-value">Fast</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="agent-card fade-in-up">
+                    <div class="agent-header reporting">
+                        <span class="agent-emoji">📊</span>
+                        <h3>Project Reporter</h3>
+                        <span class="model-badge">Claude Sonnet 4.5</span>
+                    </div>
+                    <div class="agent-body">
+                        <h4>What it handles:</h4>
+                        <ul>
+                            <li>Daily commit reports</li>
+                            <li>Weekly progress summaries</li>
+                            <li>Security audits on code changes</li>
+                            <li>PR reviews and analysis</li>
+                            <li>Team activity tracking</li>
+                            <li>Project documentation</li>
+                        </ul>
+                        <h4>Why Sonnet?</h4>
+                        <p>Report generation follows structured patterns — read diffs, summarize, check for patterns. Sonnet excels at this and produces great structured output. Extended thinking can be enabled for complex security analysis.</p>
+                        <div class="agent-stats">
+                            <div class="stat">
+                                <span class="stat-label">Input</span>
+                                <span class="stat-value">$3/MTok</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Output</span>
+                                <span class="stat-value">$15/MTok</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Context</span>
+                                <span class="stat-value">200k</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="agent-card fade-in-up">
+                    <div class="agent-header coding">
+                        <span class="agent-emoji">💻</span>
+                        <h3>Code Agent</h3>
+                        <span class="model-badge">Claude Opus 4.6</span>
+                    </div>
+                    <div class="agent-body">
+                        <h4>What it handles:</h4>
+                        <ul>
+                            <li>Writing and refactoring code</li>
+                            <li>Architecture decisions</li>
+                            <li>Complex debugging</li>
+                            <li>PR creation and branch management</li>
+                            <li>Database migrations</li>
+                            <li>System design and planning</li>
+                        </ul>
+                        <h4>Why Opus?</h4>
+                        <p>Coding requires the deepest reasoning — understanding large codebases, making architectural decisions, and writing reliable code. This is where Opus pays for itself.</p>
+                        <div class="agent-stats">
+                            <div class="stat">
+                                <span class="stat-label">Input</span>
+                                <span class="stat-value">$15/MTok</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Output</span>
+                                <span class="stat-value">$75/MTok</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Reasoning</span>
+                                <span class="stat-value">Best</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cost Analysis -->
+    <section id="costs" class="cost-analysis">
+        <div class="container">
+            <h2 class="section-title">Cost Analysis</h2>
+
+            <div class="cost-scenarios">
+                <h3>Estimated Monthly Usage</h3>
+                <p class="cost-note">Based on current usage patterns — daily reports, weekly summaries, occasional coding sessions, and regular personal chat.</p>
+
+                <div class="cost-table-wrapper">
+                    <table class="cost-table">
+                        <thead>
+                            <tr>
+                                <th>Agent</th>
+                                <th>Model</th>
+                                <th>Est. Input Tokens/mo</th>
+                                <th>Est. Output Tokens/mo</th>
+                                <th>Est. Monthly Cost</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="row-personal">
+                                <td>🏠 Personal</td>
+                                <td>Sonnet 4.5</td>
+                                <td>~5M</td>
+                                <td>~1M</td>
+                                <td class="cost">$30</td>
+                            </tr>
+                            <tr class="row-reporting">
+                                <td>📊 Reporter</td>
+                                <td>Sonnet 4.5</td>
+                                <td>~8M</td>
+                                <td>~2M</td>
+                                <td class="cost">$54</td>
+                            </tr>
+                            <tr class="row-coding">
+                                <td>💻 Code</td>
+                                <td>Opus 4.6</td>
+                                <td>~10M</td>
+                                <td>~3M</td>
+                                <td class="cost">$375</td>
+                            </tr>
+                            <tr class="row-total">
+                                <td colspan="4"><strong>API Total (estimated)</strong></td>
+                                <td class="cost"><strong>~$459/mo</strong></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="cost-comparison-grid">
+                    <div class="cost-box">
+                        <h4>Current Setup</h4>
+                        <p class="big-number">$105<span>/mo</span></p>
+                        <p>Max plan ($100) + VPS ($5)<br>Opus for everything, rate-limited</p>
+                    </div>
+                    <div class="cost-box highlight-box">
+                        <h4>Multi-Agent (API)</h4>
+                        <p class="big-number">~$464<span>/mo</span></p>
+                        <p>API pay-per-use ($459) + VPS ($5)<br>Right-sized models, no rate limits</p>
+                    </div>
+                    <div class="cost-box">
+                        <h4>Multi-Agent (Hybrid)</h4>
+                        <p class="big-number">~$205<span>/mo</span></p>
+                        <p>Max plan for Opus ($100) + Sonnet API (~$84) + VPS ($5) + spare ($16)<br>Best of both worlds</p>
+                    </div>
+                </div>
+
+                <div class="key-insight">
+                    <h3>💡 Recommended: Hybrid Approach</h3>
+                    <p>Keep the <strong>Max plan ($100/mo)</strong> for the Code Agent — Opus usage is heavy and benefits from the plan's rate limits and pricing. Run the Personal and Reporter agents on <strong>API pay-per-use</strong> with Sonnet — their token usage is modest and doesn't justify a separate plan. Total: <strong>~$205/mo</strong> for three specialized agents vs. $105 for one generalist.</p>
+                    <p>The extra ~$100/mo buys: specialized personalities, independent rate limits, isolated workspaces, and right-sized models. If cost is tight, start with just two agents (Personal on Sonnet + everything else on Opus).</p>
+                </div>
+            </div>
+
+            <div class="cost-optimization">
+                <h3>Cost Optimization Strategies</h3>
+                <div class="optimization-grid">
+                    <div class="opt-card fade-in-up">
+                        <h4>🎯 Prompt Caching</h4>
+                        <p>Anthropic's prompt caching reduces repeated system prompt costs by up to 90%. Huge savings for agents with large SOUL.md/AGENTS.md files.</p>
+                    </div>
+                    <div class="opt-card fade-in-up">
+                        <h4>📉 Context Compaction</h4>
+                        <p>OpenClaw automatically compacts long conversations, keeping token usage manageable. Shorter sessions = lower costs per turn.</p>
+                    </div>
+                    <div class="opt-card fade-in-up">
+                        <h4>⏰ Cron over Heartbeats</h4>
+                        <p>Use cron jobs for scheduled tasks (reports, checks) instead of heartbeat polling. Isolated sessions with targeted models reduce waste.</p>
+                    </div>
+                    <div class="opt-card fade-in-up">
+                        <h4>🔄 Model Fallback</h4>
+                        <p>OpenClaw supports model failover — if Opus hits rate limits, fall back to Sonnet automatically. No downtime, graceful degradation.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Implementation Plan -->
+    <section id="plan" class="plan">
+        <div class="container">
+            <h2 class="section-title">Implementation Plan</h2>
+
+            <div class="timeline">
+                <div class="timeline-item fade-in-up">
+                    <div class="timeline-marker">1</div>
+                    <div class="timeline-content">
+                        <h3>Phase 1: Personal Assistant Agent</h3>
+                        <span class="timeline-estimate">~1 hour setup</span>
+                        <p>Start with the easiest win — split off a Sonnet-powered personal agent for reminders, lists, and casual chat.</p>
+                        <ul>
+                            <li>Run <code>openclaw agents add personal</code></li>
+                            <li>Create workspace with SOUL.md (friendly, casual personality)</li>
+                            <li>Set model to <code>anthropic/claude-sonnet-4-5</code></li>
+                            <li>Add binding: route personal Telegram DMs to this agent</li>
+                            <li>Migrate reminder cron jobs to the new agent</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item fade-in-up">
+                    <div class="timeline-marker">2</div>
+                    <div class="timeline-content">
+                        <h3>Phase 2: Project Reporter Agent</h3>
+                        <span class="timeline-estimate">~2 hours setup</span>
+                        <p>Dedicated reporting agent with access to git repos and structured output skills.</p>
+                        <ul>
+                            <li>Run <code>openclaw agents add reporter</code></li>
+                            <li>Create workspace with PM-focused SOUL.md</li>
+                            <li>Set model to <code>anthropic/claude-sonnet-4-5</code></li>
+                            <li>Copy SSH keys and GitHub access to agent's auth profiles</li>
+                            <li>Migrate daily/weekly report cron jobs</li>
+                            <li>Add security audit rules to workspace</li>
+                            <li>Bind to a dedicated Telegram channel or group for reports</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item fade-in-up">
+                    <div class="timeline-marker">3</div>
+                    <div class="timeline-content">
+                        <h3>Phase 3: Code Agent (Keep as Main)</h3>
+                        <span class="timeline-estimate">~30 min adjustment</span>
+                        <p>The existing main agent becomes the dedicated code agent — already has repo access and Opus model.</p>
+                        <ul>
+                            <li>Strip non-coding responsibilities from SOUL.md</li>
+                            <li>Update AGENTS.md to focus on development tasks</li>
+                            <li>Remove personal/reporting cron jobs (now on other agents)</li>
+                            <li>Keep Opus 4.6 as model</li>
+                            <li>Add binding: triggered by specific command or Telegram channel</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="timeline-item fade-in-up">
+                    <div class="timeline-marker">4</div>
+                    <div class="timeline-content">
+                        <h3>Phase 4: Cross-Agent Communication</h3>
+                        <span class="timeline-estimate">~1 hour setup</span>
+                        <p>Enable agents to collaborate when needed — e.g., Reporter pings Code Agent for deeper analysis.</p>
+                        <ul>
+                            <li>Enable <code>tools.agentToAgent</code> with allowlists</li>
+                            <li>Set up <code>sessions_send</code> between agents</li>
+                            <li>Define escalation rules (Reporter → Code for complex diffs)</li>
+                            <li>Test cross-agent workflows end-to-end</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="config-example">
+                <h3>Sample OpenClaw Configuration</h3>
+                <pre><code>{
+  agents: {
+    list: [
+      {
+        id: "personal",
+        name: "Personal Assistant",
+        workspace: "~/.openclaw/workspace-personal",
+        model: "anthropic/claude-sonnet-4-5"
+      },
+      {
+        id: "reporter",
+        name: "Project Reporter",
+        workspace: "~/.openclaw/workspace-reporter",
+        model: "anthropic/claude-sonnet-4-5"
+      },
+      {
+        id: "main",
+        name: "Code Agent",
+        default: true,
+        workspace: "~/.openclaw/workspace",
+        model: "anthropic/claude-opus-4-6"
+      }
+    ]
+  },
+  bindings: [
+    // Personal chat → Sonnet agent
+    {
+      agentId: "personal",
+      match: {
+        channel: "telegram",
+        peer: { kind: "direct", id: "1557693358" }
+      }
+    },
+    // Report delivery channel
+    {
+      agentId: "reporter",
+      match: {
+        channel: "telegram",
+        peer: { kind: "group", id: "&lt;reports-group-id&gt;" }
+      }
+    },
+    // Everything else → Code agent
+    { agentId: "main", match: { channel: "telegram" } }
+  ],
+  tools: {
+    agentToAgent: {
+      enabled: true,
+      allow: ["personal", "reporter", "main"]
+    }
+  }
+}</code></pre>
+            </div>
+
+            <div class="key-insight">
+                <h3>🚀 Ready to Start?</h3>
+                <p>The migration can be done incrementally — one agent at a time, with zero downtime. Phase 1 takes about an hour and immediately saves on token costs for simple tasks. Each phase is independently useful, so we can pause between phases and evaluate before continuing.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Anna Loppo. Built by me 🥑 with help from Ani.</p>
+            <p class="footer-note">Powered by <a href="https://openclaw.ai" target="_blank">OpenClaw</a></p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
