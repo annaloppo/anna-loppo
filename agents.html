@@ -186,8 +186,8 @@
             <h2 class="section-title">Cost Analysis</h2>
 
             <div class="cost-scenarios">
-                <h3>Estimated Monthly Usage</h3>
-                <p class="cost-note">Based on current usage patterns — daily reports, weekly summaries, occasional coding sessions, and regular personal chat.</p>
+                <h3>The Key: One Subscription, Multiple Agents</h3>
+                <p class="cost-note">All three agents share a single Anthropic Max subscription — same API key, different models assigned per agent. No separate API billing required.</p>
 
                 <div class="cost-table-wrapper">
                     <table class="cost-table">
@@ -195,36 +195,32 @@
                             <tr>
                                 <th>Agent</th>
                                 <th>Model</th>
-                                <th>Est. Input Tokens/mo</th>
-                                <th>Est. Output Tokens/mo</th>
-                                <th>Est. Monthly Cost</th>
+                                <th>Role</th>
+                                <th>Cost</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr class="row-personal">
                                 <td>🏠 Personal</td>
                                 <td>Sonnet 4.5</td>
-                                <td>~5M</td>
-                                <td>~1M</td>
-                                <td class="cost">$30</td>
+                                <td>Reminders, lists, expenses, casual chat</td>
+                                <td class="cost">Included</td>
                             </tr>
                             <tr class="row-reporting">
                                 <td>📊 Reporter</td>
                                 <td>Sonnet 4.5</td>
-                                <td>~8M</td>
-                                <td>~2M</td>
-                                <td class="cost">$54</td>
+                                <td>Daily/weekly reports, security audits</td>
+                                <td class="cost">Included</td>
                             </tr>
                             <tr class="row-coding">
                                 <td>💻 Code</td>
                                 <td>Opus 4.6</td>
-                                <td>~10M</td>
-                                <td>~3M</td>
-                                <td class="cost">$375</td>
+                                <td>Development, architecture, debugging</td>
+                                <td class="cost">Included</td>
                             </tr>
                             <tr class="row-total">
-                                <td colspan="4"><strong>API Total (estimated)</strong></td>
-                                <td class="cost"><strong>~$459/mo</strong></td>
+                                <td colspan="3"><strong>Total (Max Plan)</strong></td>
+                                <td class="cost"><strong>$100/mo</strong></td>
                             </tr>
                         </tbody>
                     </table>
@@ -234,24 +230,20 @@
                     <div class="cost-box">
                         <h4>Current Setup</h4>
                         <p class="big-number">$105<span>/mo</span></p>
-                        <p>Max plan ($100) + VPS ($5)<br>Opus for everything, rate-limited</p>
+                        <p>Max plan ($100) + VPS ($5)<br>Single agent, Opus for everything</p>
                     </div>
                     <div class="cost-box highlight-box">
-                        <h4>Multi-Agent (API)</h4>
-                        <p class="big-number">~$464<span>/mo</span></p>
-                        <p>API pay-per-use ($459) + VPS ($5)<br>Right-sized models, no rate limits</p>
-                    </div>
-                    <div class="cost-box">
-                        <h4>Multi-Agent (Hybrid)</h4>
-                        <p class="big-number">~$205<span>/mo</span></p>
-                        <p>Max plan for Opus ($100) + Sonnet API (~$84) + VPS ($5) + spare ($16)<br>Best of both worlds</p>
+                        <h4>Multi-Agent Setup</h4>
+                        <p class="big-number">$105<span>/mo</span></p>
+                        <p>Same Max plan ($100) + VPS ($5)<br>Three specialized agents, two models</p>
                     </div>
                 </div>
 
                 <div class="key-insight">
-                    <h3>💡 Recommended: Hybrid Approach</h3>
-                    <p>Keep the <strong>Max plan ($100/mo)</strong> for the Code Agent — Opus usage is heavy and benefits from the plan's rate limits and pricing. Run the Personal and Reporter agents on <strong>API pay-per-use</strong> with Sonnet — their token usage is modest and doesn't justify a separate plan. Total: <strong>~$205/mo</strong> for three specialized agents vs. $105 for one generalist.</p>
-                    <p>The extra ~$100/mo buys: specialized personalities, independent rate limits, isolated workspaces, and right-sized models. If cost is tight, start with just two agents (Personal on Sonnet + everything else on Opus).</p>
+                    <h3>💡 Same Cost, Three Times the Specialization</h3>
+                    <p>The Max plan includes access to <strong>both Opus and Sonnet</strong>. OpenClaw routes each agent to its assigned model using the same API key. No extra subscriptions needed.</p>
+                    <p><strong>What you gain for $0 extra:</strong> specialized personalities per task, isolated workspaces (personal data stays separate from work), and smarter model allocation — Sonnet handles lightweight tasks faster while reserving Opus capacity for coding.</p>
+                    <p><strong>The only trade-off:</strong> shared rate limits across all three agents. In practice this works well — Sonnet has generous limits, and the Personal/Reporter agents use far fewer tokens than the Code agent.</p>
                 </div>
             </div>
 
